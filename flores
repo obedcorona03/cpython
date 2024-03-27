@@ -1,0 +1,30 @@
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.animation import FuncAnimation
+
+# Función para crear una flor en una posición dada
+def draw_flower(ax, x, y):
+    circle = plt.Circle((x, y), 0.05, color='orange')
+    theta = np.linspace(0, 2*np.pi, 100)
+    x_petal = x + 0.1*np.cos(theta)
+    y_petal = y + 0.1*np.sin(theta)
+    ax.fill(x_petal, y_petal, color='yellow')
+    ax.add_artist(circle)
+
+# Función de animación para mover las flores
+def animate(frame):
+    plt.cla()  # Limpiar el gráfico anterior
+    ax.set_xlim(0, 1)
+    ax.set_ylim(0, 1)
+    for i in range(5):  # Dibujar cinco flores en posiciones aleatorias
+        x = np.random.rand()
+        y = np.random.rand()
+        draw_flower(ax, x, y)
+
+# Configurar el gráfico
+fig, ax = plt.subplots()
+ax.axis('off')
+
+# Crear la animación
+ani = FuncAnimation(fig, animate, frames=50, interval=200)
+plt.show()
