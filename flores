@@ -1,0 +1,37 @@
+import turtle
+import random
+
+# Configuración inicial
+turtle.speed(0)
+turtle.bgcolor("white")
+
+# Función para dibujar una flor en una posición dada
+def draw_flower(x, y):
+    turtle.penup()
+    turtle.goto(x, y)
+    turtle.pendown()
+    turtle.color("orange")
+    turtle.begin_fill()
+    turtle.circle(10)
+    turtle.end_fill()
+    turtle.color("yellow")
+    turtle.begin_fill()
+    for _ in range(6):
+        turtle.circle(5, 60)
+        turtle.left(120)
+    turtle.end_fill()
+
+# Función de animación para mover las flores
+def animate():
+    turtle.clear()
+    turtle.hideturtle()
+    for _ in range(5):  # Dibujar cinco flores en posiciones aleatorias
+        x = random.randint(-200, 200)
+        y = random.randint(-200, 200)
+        draw_flower(x, y)
+    turtle.update()
+    turtle.ontimer(animate, 200)
+
+# Ejecutar la animación
+animate()
+turtle.done()
